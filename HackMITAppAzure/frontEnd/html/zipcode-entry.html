@@ -4,18 +4,22 @@
 
 <head>
   <title>Lend a Hand | Volunteers</title>
-  <link rel="stylesheet" type="text/css" href="../styles.css">
+  <link rel="stylesheet" type="text/css" href="../css/styles.css">
+  <link rel="icon" type="image/png" href="../img/favicon.png">
 </head>
+
+
+
 
 <body class="centered-content">
   <h1 style="padding-top: 300px;">Enter zipcode</h1>
   <form id="zipcode-entry-form">
     <input id="zipcode-input" type="text" placeholder="Ex. 02139"><br/>
-    <button id="zipcode-entry-button" type="button" style="transform: translateY(21px);" onclick="window.location.href = 'events-in-area.html'">ENTER</button>
+    <button id="zipcode-entry-button" type="button" style="transform: translateY(21px);" onclick=zipCodeEntered()>ENTER</button>
   </form>
 </body>
 
-
+<script src="../js/script.js"></script>
 
 
 </html>
