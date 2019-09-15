@@ -1,0 +1,2 @@
+# LendAHand
+HackMIT 
