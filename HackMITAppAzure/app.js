@@ -4,14 +4,17 @@ const config = require('./config');
 
 const endpoint = config.endpoint;
 const key = config.key;
-
+console.log("hello");
 const client = new CosmosClient({ endpoint, key });
-
+console.log("hello world");
 const HttpStatusCodes = { NOTFOUND: 404 };
 
 const databaseId = config.database.id;
 const containerId = config.container.id;
 const partitionKey = { kind: "Hash", paths: ["/Country"] };
+
+var localOrganizationName;
+var localZipcode;
 
  /**
  * Create the database if it does not exist
@@ -45,6 +48,7 @@ createDatabase()
   .then(() => readDatabase())
   .then(() => createContainer())
   .then(() => readContainer())
+  .then(() => createOrganization(config.items.Org1))
   .then(() => { exit(`Completed successfully`); })
   .catch((error) => { exit(`Completed with error ${JSON.stringify(error) }`) });
 
@@ -73,16 +77,7 @@ $("#to-event-list-btn").click (
     
     function () {
                     
-        var businessGuid = guid ();
-        
-        createUser (businessGuid);
-        
-        createBusiness (businessGuid);
-        
-        
-        
-        $("#signUpSuccessfulSignUp").removeClass ("pageHiddenRightSignUp", 400); // this
-        $("#newCompanyAccountSixSignUp").addClass ("pageHiddenLeftSignUp", 400);
+        createOrganization();        
         
     }
 
@@ -95,25 +90,39 @@ $("#new-event-btn").click (
     
     function () {
                     
-        var businessGuid = guid ();
-        
-        createUser (businessGuid);
-        
-        createBusiness (businessGuid);
-        
-        
-        
-        $("#signUpSuccessfulSignUp").removeClass ("pageHiddenRightSignUp", 400); // this
-        $("#newCompanyAccountSixSignUp").addClass ("pageHiddenLeftSignUp", 400);
-        
+        createOrganization();        
     }
 
 );
-
-function createOrganization () {
+/**
+ * Action to occur when organization makes new event
+ */
+$("ad-entry-btn").click (
+    function () {
         
-    var name = $("#org-name").val ();
-    
+        var postID = guid();
+        createPost(postID, localOrganizationName);        
+
+    }
+);
+
+/**
+ * Action to occur when volunteer enters zipcode
+ */
+$("zipcode-entry-button").click (
+    function () {
+        
+        localZipcode = $("#zipcode-input").val ();
+
+    }
+);
+
+async function createOrganization (organizationJson) {
+        
+    //for ()
+    //localOrganizationName = $("#org-name").val ();
+    //var name = localOrganizationName;    
+    const { item } = await client.database(databaseId).container(containerId).items.upsert(organizationJson);
 }
 
 async function createPost (postID, organizationName) {
@@ -126,7 +135,6 @@ async function createPost (postID, organizationName) {
     var volunteersNeeded = $("#event-volunteers").val ();
     var volunteersHad = 0;
     const { item } = await client.database(databaseId).container(containerId).items.upsert(itemBody);
-    console.log(`Created family item with id:\n${itemBody.id}\n`);
 
 }
 
