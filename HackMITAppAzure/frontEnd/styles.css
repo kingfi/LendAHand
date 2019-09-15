@@ -10,6 +10,10 @@
   height: 100%;
 }
 
+body{
+  background-color: aqua;
+}
+
 
 input{
   width: 20%;
@@ -17,7 +21,7 @@ input{
   box-sizing: border-box;
   background: rgba(128, 128, 128, 0.1);
   color: black;
-  border: 2px solid rgb(105, 105, 105);
+  border: 2px solid black;
   border-radius: 10px;
   font-size: 18px;
   outline: none;
@@ -29,10 +33,11 @@ textarea{
   box-sizing: border-box;
   background: rgba(128, 128, 128, 0.1);
   color: black;
-  border: 2px solid rgb(105, 105, 105);
+  border: 2px solid black;
   border-radius: 10px;
   font-size: 18px;
   outline: none;
+  resize: vertical;
 }
 
 button{
